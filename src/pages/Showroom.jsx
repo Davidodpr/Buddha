@@ -1,7 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
+import BookingModal from '../components/BookingModal';
 
 const Showroom = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState('');
+
   const locations = [
     {
       city: 'Stockholm',
@@ -22,6 +26,11 @@ const Showroom = () => {
       phone: '+46 40 123 45 67'
     }
   ];
+
+  const handleBook = (city) => {
+    setSelectedLocation(city);
+    setIsModalOpen(true);
+  };
 
   return (
     <>
@@ -46,7 +55,12 @@ const Showroom = () => {
                     <p className="showroom-hours">{location.hours}</p>
                     <p className="showroom-phone">{location.phone}</p>
                   </div>
-                  <button className="btn-outline">Book Appointment</button>
+                  <button 
+                    className="btn-outline"
+                    onClick={() => handleBook(location.city)}
+                  >
+                    Book Appointment
+                  </button>
                 </div>
               ))}
             </div>
@@ -58,11 +72,22 @@ const Showroom = () => {
             <div className="cta-content">
               <h2 className="cta-title">Private Design Consultation</h2>
               <p className="cta-text">Let our experts guide you through the perfect selection for your sanctuary.</p>
-              <button className="btn-primary">Request Consultation</button>
+              <button 
+                className="btn-primary"
+                onClick={() => handleBook('General')}
+              >
+                Request Consultation
+              </button>
             </div>
           </div>
         </section>
       </main>
+
+      <BookingModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        selectedLocation={selectedLocation}
+      />
     </>
   );
 };

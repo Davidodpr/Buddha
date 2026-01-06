@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
+import BookingModal from '../components/BookingModal';
 import { getProductBySlug, products } from '../data/products';
 
 const ProductDetail = () => {
   const { slug } = useParams();
   const product = getProductBySlug(slug);
+  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState('');
 
   if (!product) {
     return (
@@ -23,6 +27,16 @@ const ProductDetail = () => {
       </>
     );
   }
+
+  const handleRequestQuote = () => {
+    setModalMessage(`I am interested in a quote for the ${product.name}.`);
+    setIsModalOpen(true);
+  };
+
+  const handleBookVisit = () => {
+    setModalMessage(`I would like to view the ${product.name} at the showroom.`);
+    setIsModalOpen(true);
+  };
 
   // Get related products (excluding current)
   const relatedProducts = products.filter(p => p.id !== product.id).slice(0, 2);
@@ -57,8 +71,8 @@ const ProductDetail = () => {
                 <p className="product-detail-description">{product.description}</p>
                 
                 <div className="product-detail-actions">
-                  <button className="btn-primary">Request Quote</button>
-                  <button className="btn-secondary">Book Showroom Visit</button>
+                  <button onClick={handleRequestQuote} className="btn-primary">Request Quote</button>
+                  <button onClick={handleBookVisit} className="btn-secondary">Book Showroom Visit</button>
                 </div>
               </div>
             </div>
@@ -130,6 +144,12 @@ const ProductDetail = () => {
           </div>
         </section>
       </main>
+
+      <BookingModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        initialMessage={modalMessage}
+      />
     </>
   );
 };

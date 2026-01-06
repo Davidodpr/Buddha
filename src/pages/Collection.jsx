@@ -1,9 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { products } from '../data/products';
 
 const Collection = () => {
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  const categories = [
+    { id: 'All', label: 'All Products' },
+    { id: 'Intelligent Toilet', label: 'Intelligent Toilets' },
+    { id: 'Bidet Seat', label: 'Bidet Seats' },
+    { id: 'Premium Series', label: 'Premium Series' }
+  ];
+
+  const filteredProducts = activeFilter === 'All' 
+    ? products 
+    : products.filter(product => product.category === activeFilter);
+
   return (
     <>
       <Navbar />
@@ -19,14 +32,19 @@ const Collection = () => {
         <section className="collection-grid-section">
           <div className="container">
             <div className="collection-filters">
-              <button className="filter-btn active">All Products</button>
-              <button className="filter-btn">Intelligent Toilets</button>
-              <button className="filter-btn">Bidet Seats</button>
-              <button className="filter-btn">Accessories</button>
+              {categories.map(category => (
+                <button 
+                  key={category.id}
+                  className={`filter-btn ${activeFilter === category.id ? 'active' : ''}`}
+                  onClick={() => setActiveFilter(category.id)}
+                >
+                  {category.label}
+                </button>
+              ))}
             </div>
 
             <div className="collection-grid">
-              {products.map((product) => (
+              {filteredProducts.map((product) => (
                 <Link to={`/product/${product.slug}`} key={product.id} className="product-card">
                   <div className="product-image-wrapper">
                     <span className="product-tag">{product.category}</span>
@@ -43,6 +61,12 @@ const Collection = () => {
                 </Link>
               ))}
             </div>
+
+            {filteredProducts.length === 0 && (
+              <div className="text-center py-20">
+                <p className="text-text-dim">No products found in this category.</p>
+              </div>
+            )}
           </div>
         </section>
       </main>

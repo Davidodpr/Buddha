@@ -35,7 +35,27 @@ const Navbar = () => {
         <div className="container px-6 flex items-center justify-between">
           <div className="flex items-center gap-12">
             <Link to="/" className={`logo-wrapper flex items-center gap-3 ${scrolled ? 'text-black' : 'text-white'}`}>
-              <span className="logo-icon">☸</span>
+              <svg className="logo-icon-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M20 8C20 8 14 14 14 20C14 23.5 16 26 20 26C24 26 26 23.5 26 20C26 14 20 8 20 8Z"
+                  fill="currentColor"
+                  opacity="0.15"
+                />
+                <path
+                  d="M20 6C20 6 12 13 12 20C12 24.5 15 28 20 28C25 28 28 24.5 28 20C28 13 20 6 20 6Z"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  fill="none"
+                />
+                <path
+                  d="M20 12C20 12 16 16 16 20C16 22.5 17.5 24 20 24C22.5 24 24 22.5 24 20C24 16 20 12 20 12Z"
+                  stroke="currentColor"
+                  strokeWidth="1"
+                  fill="none"
+                  opacity="0.6"
+                />
+                <ellipse cx="20" cy="30" rx="6" ry="2" stroke="currentColor" strokeWidth="1" opacity="0.4"/>
+              </svg>
               <div className="logo-text">
                 <span className="logo-main">BUDDHA</span>
                 <span className="logo-sub">bath</span>
@@ -86,7 +106,27 @@ const Navbar = () => {
             >
               <div className="mobile-menu-header">
                 <div className="logo-wrapper text-black">
-                  <span className="logo-icon">☸</span>
+                  <svg className="logo-icon-svg" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M20 8C20 8 14 14 14 20C14 23.5 16 26 20 26C24 26 26 23.5 26 20C26 14 20 8 20 8Z"
+                      fill="currentColor"
+                      opacity="0.15"
+                    />
+                    <path
+                      d="M20 6C20 6 12 13 12 20C12 24.5 15 28 20 28C25 28 28 24.5 28 20C28 13 20 6 20 6Z"
+                      stroke="currentColor"
+                      strokeWidth="1.2"
+                      fill="none"
+                    />
+                    <path
+                      d="M20 12C20 12 16 16 16 20C16 22.5 17.5 24 20 24C22.5 24 24 22.5 24 20C24 16 20 12 20 12Z"
+                      stroke="currentColor"
+                      strokeWidth="1"
+                      fill="none"
+                      opacity="0.6"
+                    />
+                    <ellipse cx="20" cy="30" rx="6" ry="2" stroke="currentColor" strokeWidth="1" opacity="0.4"/>
+                  </svg>
                   <div className="logo-text">
                     <span className="logo-main">BUDDHA</span>
                     <span className="logo-sub">bath</span>
